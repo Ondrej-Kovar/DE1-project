@@ -1,0 +1,37 @@
+*.jou
+*.log
+*.str
+*.dmp
+.cache/
+.hw/
+.sim/
+.runs/
+.ip_user_files/
+.Xil/
+# Vivado simulační soubory a skripty
+*.wdf
+*.wpc
+*.db
+*.pb
+compile.bat
+elaborate.bat
+simulate.bat
+# Další Vivado simulační odpad
+*.ini
+*.txt
+*.dbg
+*.mem
+*.reloc
+*.rlx
+*.tcl
+# Zkompilované simulační soubory (XSIM)
+*.rtti
+*.svtype
+*.type
+*.version
+*.xdbg
+*.exe
+*.obj
+*.vdb
+xsim_*.c
+*.prj
