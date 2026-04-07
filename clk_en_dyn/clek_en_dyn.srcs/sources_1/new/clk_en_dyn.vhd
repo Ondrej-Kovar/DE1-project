@@ -19,9 +19,9 @@ architecture Behavioral of clk_en_dyn is
    
 --application
     constant C_STEP     : integer := 100_000;
-    constant C_MIN      : integer := 10_000;
-    constant C_MAX      : integer := 1_010_000;
-    constant C_DEFAULT  : integer := 510_000;
+    constant C_MIN      : integer := 100_000;
+    constant C_MAX      : integer := 900_000;
+    constant C_DEFAULT  : integer := 500_000;
     
 -- Internal signals
     signal sig_limit : integer range 0 to C_MAX := C_DEFAULT;
