@@ -60,6 +60,7 @@ begin
                     led_pwr <= '0';
                 end if;
                 counter <= counter+1;
+                -- keeping same value for whole period of pwm
                 if counter = 2**16 then
                     duty_stored <= duty_cycle;
                 end if;
