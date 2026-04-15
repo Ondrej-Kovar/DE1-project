@@ -13,14 +13,14 @@
 ### Debounce
   Module making sure one press of button is registered as one pulse. With every rising edge of clock signal (clk) algorythm checks whether is button signalizing "pressed" long enough. This diferentitates pressing of button from bouncing after pressing. Outputs are logic variables btn_pressed and btn_state.
 
-### Clk_en
-  Easy solution to lower frequency of clk. Rising edges are counted, overflow of counter releases output pulse.
-
 ### Bright_control
   This module is basically counter whose inputs are two button states. On every rising edge of clk if only one of inputs has rising edge, output (8 bit number) is incremented. If both inputs are on rising edge, nothing happens, if either of buttons is held, after some time, output number is incremented periodically.
 
 ### Clk_en_dyn
-  Clk_en_dyn combines functions of Clk_en and Bright_control. Input rising edge increments counter capacity changing frequency of output signal.
+  Clk_en_dyn uses functions of Bright_control and works as clasical counter to lower frequency of clk. Rising edges are counted, overflow of counter releases output pulse. Button input rising edges increment counter capacity changing frequency of output signal.
 
 ### Fade
   Module periodically transitioning through spectre of colours. If red is on maximum level, green starts to rise, once green hits maximum, red starts to fall. When red hits minimum, blue starts to rise and so on. Outputs are 8bit numbers for corresponding colours.
+
+### PWM
+  This module creates PWM signal to power LEDs. Core principle is counter with clk synchronization, input value of brightness and colour are multiplied and used as limit for output value '1', rest are '0', while 16 bit number is used as counter constant to ensure period of output PWM signal is constant.
