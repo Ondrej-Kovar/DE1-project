@@ -1,30 +1,54 @@
-*.jou
-*.log
-*.str
-*.dmp
+# ==========================================================
+# VIVADO PROJECT - GIT IGNORE
+# ==========================================================
+
+# --- Vivado logy a žurnály (včetně těch s čísly a zálohami) ---
+vivado*.log
+vivado*.jou
+vivado*.str
+vivado*.dmp
+vivado_pid*.str
+vivado_pid*.zip
+*.backup.jou
+*.backup.log
+
+# --- Dočasné a pracovní složky Vivada (včetně podadresářů) ---
+.Xil/
 .cache/
 .hw/
-.sim/
-.runs/
 .ip_user_files/
-.Xil/
-# Vivado simulační soubory a skripty
+*/.Xil/
+*/.cache/
+*/.hw/
+*/.ip_user_files/
+
+# --- Výstupy implementace a simulace (ty největší balíky dat) ---
+*.runs/
+*.sim/
+*.gen/
+*/.runs/
+*/.sim/
+*/.gen/
+
+# --- Binární simulační data a databáze (zastavují Push) ---
 *.wdf
 *.wpc
 *.db
 *.pb
-compile.bat
-elaborate.bat
-simulate.bat
-# Další Vivado simulační odpad
-*.ini
-*.txt
-*.dbg
+*.wdb
+*.wcfg
+*.vcd
+
+# --- Kompilační soubory simulátoru (XSIM) ---
 *.mem
+*.ini
+*.dbg
 *.reloc
 *.rlx
 *.tcl
-# Zkompilované simulační soubory (XSIM)
+*.vdb
+xsim_*.c
+*.prj
 *.rtti
 *.svtype
 *.type
@@ -32,9 +56,17 @@ simulate.bat
 *.xdbg
 *.exe
 *.obj
-*.vdb
-xsim_*.c
-*.prj
 
+# --- Skripty pro simulaci (Vivado si je vytvoří samo) ---
+compile.bat
+elaborate.bat
+simulate.bat
 
+# --- Ostatní systémový odpad ---
 *.zip
+*.tmp
+.DS_Store
+Thumbs.db
+fade/fade.ip_user_files/README.txt
+clk_en_dyn/clek_en_dyn.ip_user_files/README.txt
+pwm-/dfx_runtime.txt
