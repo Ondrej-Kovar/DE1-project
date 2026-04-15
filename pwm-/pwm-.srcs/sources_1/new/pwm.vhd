@@ -1,24 +1,3 @@
-----------------------------------------------------------------------------------
--- Company: 
--- Engineer: 
--- 
--- Create Date: 04/09/2026 10:10:06 AM
--- Design Name: 
--- Module Name: pwm - Behavioral
--- Project Name: 
--- Target Devices: 
--- Tool Versions: 
--- Description: 
--- 
--- Dependencies: 
--- 
--- Revision:
--- Revision 0.01 - File Created
--- Additional Comments:
--- 
-----------------------------------------------------------------------------------
-
-
 library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 use IEEE.NUMERIC_STD.ALL;
@@ -27,8 +6,8 @@ entity pwm is
     Port (
         clk      : in  STD_LOGIC;
         rst      : in  STD_LOGIC;
-        brt      : in  unsigned(7 downto 0);
-        val      : in  unsigned(7 downto 0);
+        brt      : in  STD_LOGIC_VECTOR(7 downto 0);
+        val      : in  STD_LOGIC_VECTOR(7 downto 0);
         led_pwr  : out STD_LOGIC
     );
 end pwm;
@@ -43,7 +22,7 @@ architecture Behavioral of pwm is
 begin
 
     -- duty_cycle compute
-    duty_cycle <= brt * val;
+    duty_cycle <= unsigned(brt) * unsigned(val);
 
     -- main counter process
     process(clk, rst)
@@ -61,7 +40,7 @@ begin
                 end if;
                 counter <= counter+1;
                 -- keeping same value for whole period of pwm
-                if counter = 2**16 then
+                if counter = 2**16-1 then
                     duty_stored <= duty_cycle;
                 end if;
             end if;

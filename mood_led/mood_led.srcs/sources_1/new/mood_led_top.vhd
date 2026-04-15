@@ -46,15 +46,25 @@ architecture Behavioral of mood_led_top is
                b_val : out STD_LOGIC_VECTOR (7 downto 0));
     end component fade;
     
-    component clk_en is
-        generic ( G_MAX : positive );
-        port (
-            clk : in  std_logic;
-            rst : in  std_logic;
-            ce  : out std_logic
+    component bright_control is
+        Port (
+            clk      : in  STD_LOGIC;
+            rst      : in  STD_LOGIC;
+            cnt_u    : in  STD_LOGIC; -- already debounced signal
+            cnt_d    : in  STD_LOGIC;
+            brt      : out STD_LOGIC_VECTOR(7 downto 0)
         );
-    end component clk_en;
-    --OTHER COMPONENTS (bright_control, PWM)
+    end component bright_control;
+
+    component pwm is
+        Port (
+            clk      : in  STD_LOGIC;
+            rst      : in  STD_LOGIC;
+            brt      : in  STD_LOGIC_VECTOR(7 downto 0);
+            val      : in  STD_LOGIC_VECTOR(7 downto 0);
+            led_pwr  : out STD_LOGIC
+        );
+    end component pwm;
     
     
     signal s_brtup  : std_logic;
@@ -71,6 +81,94 @@ architecture Behavioral of mood_led_top is
     signal s_b_val  : std_logic_vector (7 downto 0);
     
 begin
+    debounce_u: component debounce --brightness up
+        port map(
+            clk         => clk,
+            rst         => btnc,
+            btn_in      => btnu,
+            btn_state   => s_brtup,
+            btn_press   => open
+        );
 
+    debounce_d: component debounce -- brightness down
+        port map(
+            clk         => clk,
+            rst         => btnc,
+            btn_in      => btnd,
+            btn_state   => s_brtdw,
+            btn_press   => open
+        );
 
+    debounce_r: component debounce --speed up
+        port map(
+            clk         => clk,
+            rst         => btnc,
+            btn_in      => btnr,
+            btn_state   => open,
+            btn_press   => s_spup
+        );
+
+    debounce_l: component debounce --speed down
+        port map(
+            clk         => clk,
+            rst         => btnc,
+            btn_in      => btnl,
+            btn_state   => open,
+            btn_press   => s_spdw
+        );
+        
+    bright_control0: component bright_control
+        port map(
+            clk     => clk,
+            rst     => btnc,
+            cnt_u   => s_brtup,
+            cnt_d   => s_brtdw,
+            brt     => s_brt
+        );
+    
+    clk_en_dyn0: component clk_en_dyn
+        port map(
+            clk     => clk,
+            rst     => btnc,
+            cnt_u   => s_spup,
+            cnt_d   => s_spdw,
+            ce      => s_ce_dyn
+        );
+        
+     fade0: component fade
+        port map(
+            ce      => s_ce_dyn,
+            clk     => clk,
+            rst     => btnc,
+            r_val   => s_r_val,
+            g_val   => s_g_val,
+            b_val   => s_b_val
+        );
+        
+     pwm_r: component pwm
+        port map(
+            clk     => clk,
+            rst     => btnc,
+            brt     => s_brt,
+            val     => s_r_val,
+            led_pwr => led17_r
+        );
+        
+     pwm_g: component pwm
+        port map(
+            clk     => clk,
+            rst     => btnc,
+            brt     => s_brt,
+            val     => s_g_val,
+            led_pwr => led17_g
+        );
+        
+     pwm_b: component pwm
+        port map(
+            clk     => clk,
+            rst     => btnc,
+            brt     => s_brt,
+            val     => s_b_val,
+            led_pwr => led17_b
+        );  
 end Behavioral;

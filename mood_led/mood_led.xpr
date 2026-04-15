@@ -4,7 +4,7 @@
 <!-- Copyright 1986-2022 Xilinx, Inc. All Rights Reserved.                   -->
 <!-- Copyright 2022-2025 Advanced Micro Devices, Inc. All Rights Reserved.   -->
 
-<Project Product="Vivado" Version="7" Minor="71" Path="P:/DE1-project/mood_led/mood_led.xpr">
+<Project Product="Vivado" Version="7" Minor="71" Path="C:/Users/risak/DE1/DE1-project/mood_led/mood_led.xpr">
   <DefaultLaunch Dir="$PRUNDIR"/>
   <Configuration>
     <Option Name="Id" Val="1cc399cbb9ff4bd7af7c7454b0a27014"/>
@@ -60,7 +60,7 @@
     <Option Name="IPStaticSourceDir" Val="$PIPUSERFILESDIR/ipstatic"/>
     <Option Name="EnableBDX" Val="FALSE"/>
     <Option Name="DSABoardId" Val="nexys-a7-50t"/>
-    <Option Name="WTXSimLaunchSim" Val="0"/>
+    <Option Name="WTXSimLaunchSim" Val="3"/>
     <Option Name="WTModelSimLaunchSim" Val="0"/>
     <Option Name="WTQuestaLaunchSim" Val="0"/>
     <Option Name="WTIesLaunchSim" Val="0"/>
@@ -91,38 +91,50 @@
   <FileSets Version="1" Minor="32">
     <FileSet Name="sources_1" Type="DesignSrcs" RelSrcDir="$PSRCDIR/sources_1" RelGenDir="$PGENDIR/sources_1">
       <Filter Type="Srcs"/>
-      <File Path="$PSRCDIR/sources_1/imports/DE1-project/clk_en_dyn/clek_en_dyn.srcs/sources_1/new/clk_en_dyn.vhd">
+      <File Path="$PSRCDIR/sources_1/imports/DE1-project/bright_control/bright_control.srcs/sources_1/new/bright_control.vhd">
         <FileInfo>
-          <Attr Name="AutoDisabled" Val="1"/>
-          <Attr Name="ImportPath" Val="$PPRDIR/../clk_en_dyn/clek_en_dyn.srcs/sources_1/new/clk_en_dyn.vhd"/>
-          <Attr Name="ImportTime" Val="1775722358"/>
-          <Attr Name="UsedIn" Val="synthesis"/>
-          <Attr Name="UsedIn" Val="simulation"/>
-        </FileInfo>
-      </File>
-      <File Path="$PSRCDIR/sources_1/imports/DE1-project/fade/fade.srcs/sources_1/new/fade.vhd">
-        <FileInfo>
-          <Attr Name="AutoDisabled" Val="1"/>
-          <Attr Name="ImportPath" Val="$PPRDIR/../fade/fade.srcs/sources_1/new/fade.vhd"/>
-          <Attr Name="ImportTime" Val="1775722358"/>
-          <Attr Name="UsedIn" Val="synthesis"/>
-          <Attr Name="UsedIn" Val="simulation"/>
-        </FileInfo>
-      </File>
-      <File Path="$PSRCDIR/sources_1/imports/new/debounce.vhd">
-        <FileInfo>
-          <Attr Name="AutoDisabled" Val="1"/>
-          <Attr Name="ImportPath" Val="C:/Users/270829/DE1/debounce/debounce.srcs/sources_1/new/debounce.vhd"/>
-          <Attr Name="ImportTime" Val="1773913989"/>
+          <Attr Name="ImportPath" Val="$PPRDIR/../bright_control/bright_control.srcs/sources_1/new/bright_control.vhd"/>
+          <Attr Name="ImportTime" Val="1776277061"/>
           <Attr Name="UsedIn" Val="synthesis"/>
           <Attr Name="UsedIn" Val="simulation"/>
         </FileInfo>
       </File>
       <File Path="$PSRCDIR/sources_1/imports/new/clk_en.vhd">
         <FileInfo>
-          <Attr Name="AutoDisabled" Val="1"/>
-          <Attr Name="ImportPath" Val="C:/Users/270829/DE1/counter_top/counter_top.srcs/sources_1/new/clk_en.vhd"/>
+          <Attr Name="ImportPath" Val="$PPRDIR/../../../../270829/DE1/counter_top/counter_top.srcs/sources_1/new/clk_en.vhd"/>
           <Attr Name="ImportTime" Val="1772708026"/>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
+      <File Path="$PSRCDIR/sources_1/imports/new/clk_en_dyn.vhd">
+        <FileInfo>
+          <Attr Name="ImportPath" Val="$PPRDIR/../clk_en_dyn/clek_en_dyn.srcs/sources_1/new/clk_en_dyn.vhd"/>
+          <Attr Name="ImportTime" Val="1775727937"/>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
+      <File Path="$PSRCDIR/sources_1/imports/new/debounce.vhd">
+        <FileInfo>
+          <Attr Name="ImportPath" Val="$PPRDIR/../../../../270829/DE1/debounce/debounce.srcs/sources_1/new/debounce.vhd"/>
+          <Attr Name="ImportTime" Val="1773913989"/>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
+      <File Path="$PSRCDIR/sources_1/imports/DE1-project/fade/fade.srcs/sources_1/new/fade.vhd">
+        <FileInfo>
+          <Attr Name="ImportPath" Val="$PPRDIR/../fade/fade.srcs/sources_1/new/fade.vhd"/>
+          <Attr Name="ImportTime" Val="1775722358"/>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
+      <File Path="$PSRCDIR/sources_1/imports/DE1-project/pwm-/pwm-.srcs/sources_1/new/pwm.vhd">
+        <FileInfo>
+          <Attr Name="ImportPath" Val="$PPRDIR/../pwm-/pwm-.srcs/sources_1/new/pwm.vhd"/>
+          <Attr Name="ImportTime" Val="1776272804"/>
           <Attr Name="UsedIn" Val="synthesis"/>
           <Attr Name="UsedIn" Val="simulation"/>
         </FileInfo>
@@ -152,9 +164,15 @@
     </FileSet>
     <FileSet Name="sim_1" Type="SimulationSrcs" RelSrcDir="$PSRCDIR/sim_1" RelGenDir="$PGENDIR/sim_1">
       <Filter Type="Srcs"/>
+      <File Path="$PSRCDIR/sim_1/new/mood_led_tb.vhd">
+        <FileInfo>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
       <Config>
         <Option Name="DesignMode" Val="RTL"/>
-        <Option Name="TopModule" Val="debounce"/>
+        <Option Name="TopModule" Val="tb_mood_led_top"/>
         <Option Name="TopLib" Val="xil_defaultlib"/>
         <Option Name="TopAutoSet" Val="TRUE"/>
         <Option Name="TransportPathDelay" Val="0"/>
@@ -214,7 +232,7 @@
       <Report Name="ROUTE_DESIGN.REPORT_METHODOLOGY" Enabled="1"/>
       <RQSFiles/>
     </Run>
-    <Run Id="impl_1" Type="Ft2:EntireDesign" Part="xc7a50ticsg324-1L" ConstrsSet="constrs_1" Description="Default settings for Implementation." AutoIncrementalCheckpoint="false" WriteIncrSynthDcp="false" State="current" SynthRun="synth_1" IncludeInArchive="true" IsChild="false" GenFullBitstream="true" AutoIncrementalDir="$PSRCDIR/utils_1/imports/impl_1" AutoRQSDir="$PSRCDIR/utils_1/imports/impl_1" ParallelReportGen="true">
+    <Run Id="impl_1" Type="Ft2:EntireDesign" Part="xc7a50ticsg324-1L" ConstrsSet="constrs_1" Description="Default settings for Implementation." AutoIncrementalCheckpoint="false" WriteIncrSynthDcp="false" State="current" SynthRun="synth_1" IncludeInArchive="true" IsChild="false" GenFullBitstream="true" AutoIncrementalDir="$PSRCDIR/utils_1/imports/impl_1" LaunchOptions="-jobs 10 " AutoRQSDir="$PSRCDIR/utils_1/imports/impl_1" ParallelReportGen="true">
       <Strategy Version="1" Minor="2">
         <StratHandle Name="Vivado Implementation Defaults" Flow="Vivado Implementation 2025"/>
         <Step Id="init_design"/>

@@ -10,20 +10,20 @@ architecture Behavioral of tb_bright_control is
     -- simulated component declaration (UUT - Unit Under Test)
     component bright_control
         Port (
-            clk     : in  STD_LOGIC;
-            rst     : in  STD_LOGIC;
-            cnt_u   : in  STD_LOGIC;
-            cnt_d   : in  STD_LOGIC;
-            brt     : out unsigned(7 downto 0)
+            clk      : in  STD_LOGIC;
+            rst      : in  STD_LOGIC;
+            cnt_u    : in  STD_LOGIC;
+            cnt_d    : in  STD_LOGIC;
+            brt      : out STD_LOGIC_VECTOR(7 downto 0) -- ZMĚNĚNO na SLV
         );
     end component;
 
     -- signals for component connection
-    signal clk     : STD_LOGIC := '0';
-    signal rst     : STD_LOGIC := '0';
-    signal cnt_u   : STD_LOGIC := '0';
-    signal cnt_d   : STD_LOGIC := '0';
-    signal brt     : unsigned(7 downto 0);
+    signal clk      : STD_LOGIC := '0';
+    signal rst      : STD_LOGIC := '0';
+    signal cnt_u    : STD_LOGIC := '0';
+    signal cnt_d    : STD_LOGIC := '0';
+    signal brt      : STD_LOGIC_VECTOR(7 downto 0); -- ZMĚNĚNO na SLV
 
     -- defining clock period
     constant clk_period : time := 10 ns;
@@ -49,34 +49,35 @@ begin
         wait for clk_period/2;
     end process;
 
-    -- main simuli process
+    -- main stimuli process
     stim_proc: process
-    begin		
-        -- reset to deafult state
+    begin        
+        -- reset to default state
         rst <= '1';
-        wait for 50 ns;	
+        wait for 50 ns;    
         rst <= '0';
         wait for clk_period * 10;
         
-        -- short press UP (should add 5 -> 133)
+        -- short press UP (should add 5 -> results in 133)
         cnt_u <= '1';
-        wait for clk_period * 10; -- short press for 10 ticks
+        wait for clk_period * 5; 
         cnt_u <= '0';
-        wait for 10 us;
+        wait for 200 ns; -- wait a bit to see the result
 
-        -- short press DOWN (should substract 5 -> 128)
+        -- short press DOWN (should subtract 5 -> back to 128)
         cnt_d <= '1';
-        wait for clk_period * 10;
+        wait for clk_period * 5;
         cnt_d <= '0';
-        wait for 10 us;
+        wait for 200 ns;
 
-        -- long press UP (should rapidly add up)
+        -- long press UP (to test the auto-repeat logic)
+        -- Make sure DELAY_500MS is set to small value (e.g. 50) in bright_control.vhd for this to work in sim
         cnt_u <= '1';
-        wait for 40 us; 
+        wait for clk_period * 200; 
         cnt_u <= '0';
-        wait for 100 us;
+        wait for 500 ns;
 
-        -- both buttons pressed
+        -- both buttons pressed (should do nothing based on your logic)
         cnt_u <= '1';
         cnt_d <= '1';
         wait for clk_period * 50;

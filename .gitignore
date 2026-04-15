@@ -35,3 +35,6 @@ simulate.bat
 *.vdb
 xsim_*.c
 *.prj
+
+
+*.zip

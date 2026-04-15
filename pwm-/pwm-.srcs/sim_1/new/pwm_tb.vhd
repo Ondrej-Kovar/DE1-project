@@ -7,30 +7,28 @@ end pwm_tb;
 
 architecture Behavioral of pwm_tb is
 
-    -- tested component (UUT - Unit Under Test)
-    component PWM_Module
+    component pwm
         Port (
             clk      : in  STD_LOGIC;
             rst      : in  STD_LOGIC;
-            brt      : in  unsigned(7 downto 0);
-            val      : in  unsigned(7 downto 0);
+            brt      : in  STD_LOGIC_VECTOR(7 downto 0);
+            val      : in  STD_LOGIC_VECTOR(7 downto 0);
             led_pwr  : out STD_LOGIC
         );
     end component;
 
-    -- signals for connecting UUT
     signal clk      : STD_LOGIC := '0';
     signal rst      : STD_LOGIC := '0';
-    signal brt      : unsigned(7 downto 0) := (others => '0');
-    signal val      : unsigned(7 downto 0) := (others => '0');
+    signal brt      : STD_LOGIC_VECTOR(7 downto 0) := (others => '0');
+    signal val      : STD_LOGIC_VECTOR(7 downto 0) := (others => '0');
     signal led_pwr  : STD_LOGIC;
 
-    constant clk_period : time := 10 ns;
+    constant clk_period : time := 1 ns;
+    constant pwm_period : time := clk_period * 65536;
 
 begin
 
-    -- Instancing PWM module
-    uut: PWM_Module 
+    uut: pwm 
         port map (
             clk => clk,
             rst => rst,
@@ -39,40 +37,57 @@ begin
             led_pwr => led_pwr
         );
 
-    -- clk generator
     clk_process : process
     begin
-        clk <= '0';
-        wait for clk_period/2;
-        clk <= '1';
-        wait for clk_period/2;
+        clk <= '0'; wait for clk_period/2;
+        clk <= '1'; wait for clk_period/2;
     end process;
 
-    -- stimuli process
     stim_proc: process
-    begin		
-        -- system reset
-        rst <= '1';
-        wait for 50 ns;	
-        rst <= '0';
-        wait for clk_period * 10;
+    begin        
+        -- Inicializace: val na 100%, brt na 0%
+        val <= std_logic_vector(to_unsigned(255, 8)); 
+        brt <= std_logic_vector(to_unsigned(0, 8)); 
 
-        -- low duty_cycle (eg. 10 * 20 = 200 z 65535)
-        brt <= to_unsigned(10, 8);
-        val <= to_unsigned(20, 8);
+        -- Reset systému
+        rst <= '1';
+        wait for 100 ns;    
+        rst <= '0';
         
-        -- waiting for new cycle (65536 ticks)
+        -- --- VZESTUPNÁ FÁZE (měníme brt) ---
+        
+        -- 1. FÁZE: brt = 0 (0% jas) -> 1 cyklus
+        report "Starting phase: brt 0%";
+        wait for pwm_period;
+
+        -- 2. FÁZE: brt = 128 (cca 50% jas) -> 2 cykly
+        report "Starting phase: brt 50%";
+        brt <= std_logic_vector(to_unsigned(128, 8));
+        wait until falling_edge(led_pwr);
         wait until falling_edge(led_pwr);
 
-        -- 3. change to 50% (128 * 256 = 32768, roughly half of 65535)
-        brt <= to_unsigned(128, 8);
-        val <= to_unsigned(255, 8);
+        -- 3. FÁZE: brt = 255 (cca 100% jas) -> 2 cykly
+        report "Starting phase: brt 100%, val 100%";
+        brt <= std_logic_vector(to_unsigned(255, 8));
+        wait until falling_edge(led_pwr);
+        wait until falling_edge(led_pwr);
+        
+        -- --- SESTUPNÁ FÁZE (měníme val) ---
+        
+        -- 4. FÁZE: val = 128 (cca 50% jas) -> 2 cykly
+        report "Starting phase: val down to 50%";
+        val <= std_logic_vector(to_unsigned(128, 8));
+        wait until falling_edge(led_pwr);
+        wait until falling_edge(led_pwr);
 
-        -- keep simulation running
-        wait for clk_period * 100000;
-
-        -- stop simulation
-        report "Simulation completed";
+        -- 5. FÁZE: val = 0 (0% jas) -> 1 cyklus
+        report "Starting phase: val down to 0%";
+        val <= std_logic_vector(to_unsigned(0, 8));
+        wait for pwm_period;
+        
+        -- Konec simulace
+        wait for 10 us;
+        report "Simulation sequence finished successfully";
         wait;
     end process;
 
