@@ -23,4 +23,4 @@
   Clk_en_dyn combines functions of Clk_en and Bright_control. Input rising edge increments counter capacity changing frequency of output signal.
 
 ### Fade
-  
+  Module periodically transitioning through spectre of colours. If red is on maximum level, green starts to rise, once green hits maximum, red starts to fall. When red hits minimum, blue starts to rise and so on. Outputs are 8bit numbers for corresponding colours.
