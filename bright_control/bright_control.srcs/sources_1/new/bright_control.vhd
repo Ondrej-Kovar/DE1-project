@@ -60,7 +60,7 @@ begin
                     end if;
 
                 elsif (cnt_d = '1' and cnt_d_last = '0' and cnt_u = '0') then
-                    if brt_reg >= 5 then
+                    if brt_reg >= 10 then
                         brt_reg <= brt_reg - 5;
                     end if;
                 elsif cnt_d = '1' and cnt_d_last = '1' and cnt_u = '0' then
@@ -69,7 +69,7 @@ begin
                     else
                         held <= '1';
                         delay <= (others => '0');
-                        if brt_reg >= 2 then
+                        if brt_reg >= 10 then
                             brt_reg <= brt_reg - 2;
                         end if;
                     end if;
