@@ -70,3 +70,4 @@ Thumbs.db
 fade/fade.ip_user_files/README.txt
 clk_en_dyn/clek_en_dyn.ip_user_files/README.txt
 pwm-/dfx_runtime.txt
+mood_led/mood_led.srcs/utils_1/imports/synth_1/mood_led_top.dcp

@@ -130,8 +130,8 @@ begin
         port map(
             clk     => clk,
             rst     => btnc,
-            cnt_u   => s_spup,
-            cnt_d   => s_spdw,
+            cnt_u   => s_spdw,  --internal counter up -> slower speed
+            cnt_d   => s_spup,  --internal counter down -> faster speed
             ce      => s_ce_dyn
         );
         
