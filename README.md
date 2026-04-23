@@ -23,7 +23,7 @@ You can view the full activity and contributions of all team members in our [Com
 ## Block Diagram
 The following diagram illustrates the hierarchy of VHDL modules and the signal flow between the top level and individual components.
 
-![block diagram](./block_scheme.svg)
+![block diagram](./block_scheme.jpg)
 
 ---
 
