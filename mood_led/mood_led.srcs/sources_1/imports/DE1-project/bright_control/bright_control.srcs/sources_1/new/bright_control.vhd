@@ -21,7 +21,7 @@ architecture Behavioral of bright_control is
     
     -- for implementation
     constant DELAY_500MS : unsigned(25 downto 0) := to_unsigned(50_000_000, 26);
-    constant DELAY_100MS : unsigned(25 downto 0) := to_unsigned(10_000_000, 26);
+    constant DELAY_50MS : unsigned(25 downto 0) := to_unsigned(5_000_000, 26);
     -- for simulation
     --constant DELAY_500MS : unsigned(25 downto 0) := to_unsigned(50, 26);
     --constant DELAY_100MS : unsigned(25 downto 0) := to_unsigned(10, 26);
@@ -45,32 +45,32 @@ begin
                     delay <= (others => '0');
                 
                 elsif (cnt_u = '1' and cnt_u_last = '0' and cnt_d = '0') then
-                    if brt_reg <= 250 then
-                        brt_reg <= brt_reg + 5;
+                    if brt_reg <= 240 then
+                        brt_reg <= brt_reg + 10;
                     end if;
                 elsif cnt_u = '1' and cnt_u_last = '1' and cnt_d = '0' then
-                    if (held = '0' and delay < DELAY_500MS) or (held = '1' and delay < DELAY_100MS) then
+                    if (held = '0' and delay < DELAY_500MS) or (held = '1' and delay < DELAY_50MS) then
                         delay <= delay + 1;
                     else
                         held <= '1';
                         delay <= (others => '0');
-                        if brt_reg <= 253 then
-                            brt_reg <= brt_reg + 2;
+                        if brt_reg <= 250 then
+                            brt_reg <= brt_reg + 5;
                         end if;
                     end if;
 
                 elsif (cnt_d = '1' and cnt_d_last = '0' and cnt_u = '0') then
-                    if brt_reg >= 5 then
-                        brt_reg <= brt_reg - 5;
+                    if brt_reg >= 10 then
+                        brt_reg <= brt_reg - 10;
                     end if;
                 elsif cnt_d = '1' and cnt_d_last = '1' and cnt_u = '0' then
-                    if (held = '0' and delay < DELAY_500MS) or (held = '1' and delay < DELAY_100MS) then
+                    if (held = '0' and delay < DELAY_500MS) or (held = '1' and delay < DELAY_50MS) then
                         delay <= delay + 1;
                     else
                         held <= '1';
                         delay <= (others => '0');
-                        if brt_reg >= 2 then
-                            brt_reg <= brt_reg - 2;
+                        if brt_reg >= 10 then
+                            brt_reg <= brt_reg - 5;
                         end if;
                     end if;
                 end if;
