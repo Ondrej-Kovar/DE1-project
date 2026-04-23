@@ -1,26 +1,97 @@
-# RGB mood lamp
-  VHDL code for RGB lamp to enlighten your day. Fading colours with adjustable brightness and speed of color change. Designed for Nexys A7-50T board.
-## Main functions
- - fading efect of rgb LED
- - modifying brightness of LED
- - modifying speed of colour change
+# Digital Electronics 1 Project: RGB mood lamp
 
-## Description
-  RGB LED is glowing with fading effect, you can use buttons to change either brightness or colour change speed. LED is supplied with PWM signal for each colour, pressing corresponding buttons changes duty cycle of those PWMs.
-  
-![block diagram](main/block_scheme.drawio.png)
+[![Vivado 2025.2](https://img.shields.io/badge/Vivado-2025.2-blue.svg)](https://www.xilinx.com/products/design-tools/vivado.html)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-### Debounce
-  Module making sure one press of button is registered as one pulse. With every rising edge of clock signal (clk) algorythm checks whether is button signalizing "pressed" long enough. This diferentitates pressing of button from bouncing after pressing. Outputs are logic variables btn_pressed and btn_state.
+## Problem Description
+VHDL code for RGB lamp to enlighten your day. Fading colours in colour wheel loop with adjustable brightness and speed of colour change. Designed for Nexys A7-50T board utilizing RGB LED and 5 buttons.
+
+---
+
+## Team & Git Flow
+The project tasks and module development were divided among the team members as follows:
+
+| Team Member | Responsibilities / Modules Developed |
+| :--- | :--- |
+| [**Ondřej Kovář**](https://github.com/Ondrej-Kovar) | README, block diagram, PWM and bright_control modules |
+| [**Richard Královský**](https://github.com/rkralovsky) | simulations, clk_en_dyn, fade, toplevel modules, implementaition |
+
+You can view the full activity and contributions of all team members in our [Commit History](https://github.com/Ondrej-Kovar/DE1-project/commits/main).
+
+---
+
+## Block Diagram
+The following diagram illustrates the hierarchy of VHDL modules and the signal flow between the top level and individual components.
+
+![block diagram](./block_scheme.jpg)
+
+---
+
+## Inputs and Outputs
+
+| Signal Name | Direction | Width | Description |
+|:--- |:---:|:---:|:--- |
+| **clk** | Input | 1 | System clock 100 MHz |
+| **btnc** | Input | 1 | System reset |
+| **btnu** | Input | 1 | Increase bightness |
+| **btnd** | Input | 1 | Decrease bightness |
+| **btnr** | Input | 1 | Increase fading speed |
+| **btnl** | Input | 1 | Decrease fading speed |
+| **led_17r** | Output | 1 | Red PWM supply |
+| **led_17g** | Output | 1 | Green PWM supply |
+| **led_17b** | Output | 1 | Blue PWM supply |
+
+---
+
+## New Blocks and Simulations 
 
 ### Bright_control
-  This module is basically counter whose inputs are two button states. On every rising edge of clk if only one of inputs has rising edge, output (8 bit number) is incremented. If both inputs are on rising edge, nothing happens, if either of buttons is held, after some time, output number is incremented periodically.
+
+![Waveform Screenshot](./bright_control/bright_control_tb.png)
+
+  This simulation verifies desired module function. On every rising edge of clk if only one of button inputs is on rising edge, output (8 bit number) is incremented. If both inputs are on rising edge, nothing happens, if either of buttons is held, after some time, output number is incremented periodically.
 
 ### Clk_en_dyn
-  Clk_en_dyn uses functions of Bright_control and works as clasical counter to lower frequency of clk. Rising edges are counted, overflow of counter releases output pulse. Button input rising edges increment counter capacity changing frequency of output signal.
+
+![Waveform Screenshot](./clk_en_dyn/clk_en_dyn_tb.png)
+
+  This simulation verifies that this module works similary like bright_control combined with clasical clock enable. Rising edges of clk are counted, overflow of counter releases output pulse. Button input increments counter capacity changing frequency of output signal.
 
 ### Fade
-  Module periodically transitioning through spectre of colours. If red is on maximum level, green starts to rise, once green hits maximum, red starts to fall. When red hits minimum, blue starts to rise and so on. Outputs are 8bit numbers for corresponding colours.
+
+![Waveform Screenshot](./fade/fade_tb_analog.png)
+![Waveform Screenshot](./fade/fade_tb_full_cycle.png)
+
+  First simulation shows how output signals looklike along each other, one is maximized, second is increasing/decreasing, third is minimized. Second simulation show full cycle of fading colours in comparison to module's inner counter. 
 
 ### PWM
-  This module creates PWM signal to power LEDs. Core principle is counter with clk synchronization, input value of brightness and colour are multiplied and used as limit for output value '1', rest are '0', while 16 bit number is used as counter constant to ensure period of output PWM signal is constant.
+
+![Waveform Screenshot](./pwm-/pwm_tb.png)
+
+   Simulation verifies duty cycle is changing based on both input vaules and period is constant. Change of input values doesn't take effect until new period.
+  
+---
+
+## Vivado Project
+The complete project folder is configured for **Vivado 2025.2**.
+* **Source files:** Located in the `src/` directory.
+* **Testbenches:** Located in the `sim/` directory.
+
+**To run the project:**
+1. Clone the repository.
+2. Open Vivado 2025.2.
+3. Select `Open Project` and point to the `.xpr` file in the root directory.
+
+---
+
+## Other Outputs
+
+* ** A3 Poster:** [Link to your poster PDF](./poster.pdf)
+
+### Tools & References
+* **Software:** Vivado 2025.2
+* **References:** * [Digital Electronics 1 Repository](https://github.com/tomas-fryza/digital-electronics-1)
+* **Test Benches** Generated via Gemini AI
+
+---
+
