@@ -74,3 +74,5 @@ mood_led/mood_led.srcs/utils_1/imports/synth_1/mood_led_top.dcp
 mood_led/hs_err_pid9620.log
 mood_led/mood_led.hw/mood_led.lpr
 mood_led/dfx_runtime.txt
+mood_led/mood_led.cache/wt/webtalk_pa.xml
+mood_led/mood_led.hw/hw_1/hw.xml
