@@ -23,7 +23,7 @@ You can view the full activity and contributions of all team members in our [Com
 ## Block Diagram
 The following diagram illustrates the hierarchy of VHDL modules and the signal flow between the top level and individual components.
 
-![block diagram](./block_scheme.jpg)
+![block diagram](./images/block_scheme.jpg)
 
 ---
 
@@ -47,33 +47,33 @@ The following diagram illustrates the hierarchy of VHDL modules and the signal f
 
 ### Bright_control
 
-![Waveform Screenshot](./bright_control/bright_control_tb.png)
+![Waveform Screenshot](./Blocks/bright_control/bright_control_tb.png)
 
   This simulation verifies desired module function. On every rising edge of clk if only one of button inputs is on rising edge, output (8 bit number) is incremented. If both inputs are on rising edge, nothing happens, if either of buttons is held, after some time, output number is incremented periodically.
 
 ### Clk_en_dyn
 
-![Waveform Screenshot](./clk_en_dyn/clk_en_dyn_tb.png)
+![Waveform Screenshot](./Blocks/clk_en_dyn/clk_en_dyn_tb.png)
 
   This simulation verifies that this module works similary like bright_control combined with clasical clock enable. Rising edges of clk are counted, overflow of counter releases output pulse. Button input increments counter capacity changing frequency of output signal.
 
 ### Fade
 
-![Waveform Screenshot](./fade/fade_tb_analog.png)
-![Waveform Screenshot](./fade/fade_tb_full_cycle.png)
+![Waveform Screenshot](./Blocks/fade/fade_tb_analog.png)
+![Waveform Screenshot](./Blocks/fade/fade_tb_full_cycle.png)
 
   First simulation shows how output signals looklike along each other, one is maximized, second is increasing/decreasing, third is minimized. Second simulation show full cycle of fading colours in comparison to module's inner counter. 
 
 ### PWM
 
-![Waveform Screenshot](./pwm-/pwm_tb.png)
+![Waveform Screenshot](./Blocks/pwm-/pwm_tb.png)
 
    Simulation verifies duty cycle is changing based on both input vaules and period is constant. Change of input values doesn't take effect until new period.
   
 ---
 
 ## Vivado Project
-The complete project folder is configured for **Vivado 2025.2**.
+The complete [project folder](./mood_led) is configured for **Vivado 2025.2**.
 * **Source files:** Located in the `src/` directory.
 * **Testbenches:** Located in the `sim/` directory.
 
