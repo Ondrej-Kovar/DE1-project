@@ -13,8 +13,8 @@ The project tasks and module development were divided among the team members as 
 
 | Team Member | Responsibilities / Modules Developed |
 | :--- | :--- |
-| [**Ondřej Kovář**](https://github.com/Ondrej-Kovar) | README, block diagram, PWM and bright_control modules |
-| [**Richard Královský**](https://github.com/rkralovsky) | simulations, clk_en_dyn, fade, toplevel modules, implementaition |
+| [**Ondřej Kovář**](https://github.com/Ondrej-Kovar) | README, block diagram, PWM and bright_control modules + simulations, poster |
+| [**Richard Královský**](https://github.com/rkralovsky) | README, clk_en_dyn and fade modules + simulations, toplevel implementaition |
 
 You can view the full activity and contributions of all team members in our [Commit History](https://github.com/Ondrej-Kovar/DE1-project/commits/main).
 
@@ -43,7 +43,27 @@ The following diagram illustrates the hierarchy of VHDL modules and the signal f
 
 ---
 
-## New Blocks and Simulations 
+## Vivado Project
+The complete [project folder](./mood_led) is configured for **Vivado 2025.2**.
+* **xpr file:** [mood_led.xpr](./mood_led/mood_led.xpr)
+* **Source files:** Located in the [srcs](./mood_led/mood_led.srcs) directory.
+
+Each functional block is implemented in a separate VHDL file:
+
+* [Top Level](mood_led/mood_led.srcs/sources_1/new/mood_led_top.vhd) - Main structural wrapper.
+* [Brightness Control](mood_led/mood_led.srcs/sources_1/imports/DE1-project/bright_control/bright_control.srcs/sources_1/new/bright_control.vhd) - Handles user input and intensity.
+* [Dynamic Clock Enable](mood_led/mood_led.srcs/sources_1/imports/new/clk_en_dyn.vhd) - Variable frequency generator.
+* [Fade Logic](mood_led/mood_led.srcs/sources_1/imports/DE1-project/fade/fade.srcs/sources_1/new/fade.vhd) - RGB color wheel state machine.
+* [PWM Generator](mood_led/mood_led.srcs/sources_1/imports/DE1-project/pwm-/pwm-.srcs/sources_1/new/pwm.vhd) - Output pulse width modulation.
+
+**To run the project:**
+1. Clone the repository.
+2. Open Vivado 2025.2.
+3. Select `Open Project` and point to the `.xpr` file in the root directory.
+
+---
+
+## New blocks and Simulations
 
 ### Bright_control
 
@@ -69,6 +89,7 @@ This block manages brightness using an up-down counter with an integrated auto-r
 ![Waveform Screenshot](./Blocks/pwm-/pwm_tb.png)
 
   This module implements a PWM generator with an integrated hardware multiplier. It calculates the duty cycle by multiplying two 8-bit inputs: global brightness and colour value. The resulting 16-bit product allows for high-resolution dimming with 2^16 (65,536) discrete steps. Any changes to the input values do not take effect until the start of the next PWM period. This is achieved by latching the calculated duty cycle into a shadow register once the counter reaches its maximum value.
+
   
 ---
 ## Resource report
@@ -79,18 +100,7 @@ This block manages brightness using an up-down counter with an integrated auto-r
   
 ---
 
-## Vivado Project
-The complete [project folder](./mood_led) is configured for **Vivado 2025.2**.
-* **xpr file:** [mood_led.xpr](./mood_led/mood_led.xpr)
-* **Source files:** Located in the [srcs](./mood_led/mood_led.srcs) directory.
 
-
-**To run the project:**
-1. Clone the repository.
-2. Open Vivado 2025.2.
-3. Select `Open Project` and point to the `.xpr` file in the root directory.
-
----
 
 ## Other Outputs
 
