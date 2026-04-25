@@ -1,3 +1,12 @@
+-- ============================================================================
+-- Institution: Brno University of Technology (VUT Brno)
+-- Author:      [Ondrej Kovar]
+-- Date:        April 2026
+-- 
+-- Block Name:  pwm
+-- Description: Generates a PWM signal with 16-bit resolution. Multiplies 
+--              color and brightness inputs for final duty cycle scaling.
+-- ============================================================================
 library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 use IEEE.NUMERIC_STD.ALL;

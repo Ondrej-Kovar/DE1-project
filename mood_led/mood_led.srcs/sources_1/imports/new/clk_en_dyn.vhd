@@ -1,3 +1,12 @@
+-- ============================================================================
+-- Institution: Brno University of Technology (VUT Brno)
+-- Author:      [Richard Kralovsky]
+-- Date:        April 2026
+-- 
+-- Block Name:  clk_en_dyn
+-- Description: Generates a variable frequency pulse (111 Hz - 1000 Hz) to 
+--              control effect speed. Frequency is adjustable via user input.
+-- ============================================================================
 library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 

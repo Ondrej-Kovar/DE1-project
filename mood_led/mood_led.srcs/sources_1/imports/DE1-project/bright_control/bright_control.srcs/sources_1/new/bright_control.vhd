@@ -1,3 +1,12 @@
+-- ============================================================================
+-- Institution: Brno University of Technology (VUT Brno)
+-- Author:      [Ondrej Kovar]
+-- Date:        April 2026
+-- 
+-- Block Name:  bright_control
+-- Description: Manages brightness levels using an up-down counter with 
+--              auto-repeat logic. Outputs an 8-bit global intensity vector.
+-- ============================================================================
 library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 use IEEE.NUMERIC_STD.ALL;

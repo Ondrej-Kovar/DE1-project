@@ -1,3 +1,13 @@
+-- ============================================================================
+-- Institution: Brno University of Technology (VUT Brno)
+-- Author:      [Richard Kralovsky]
+-- Date:        April 2026
+-- 
+-- Block Name:  fade
+-- Description: Implements an RGB color wheel algorithm. Transitions through 
+--              6 phases (Red -> Yellow -> Green -> Cyan -> Blue -> Magenta 
+--              -> Red) to provide smooth color fading based on clk_en_dyn.
+-- ============================================================================
 library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 use IEEE.NUMERIC_STD.ALL;

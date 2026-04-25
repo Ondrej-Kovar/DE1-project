@@ -1,3 +1,13 @@
+-- ============================================================================
+-- Institution: Brno University of Technology (VUT Brno)
+-- Author:      [Richard Kralovsky]
+-- Date:        April 2026
+-- 
+-- Block Name:  mood_led_top
+-- Description: Top-level structural wrapper for the Mood LED Controller. 
+--              Integrates debouncing logic, dynamic speed control, color 
+--              fading, and brightness-aware PWM generation for RGB LEDs.
+-- ============================================================================
 library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 
