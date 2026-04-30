@@ -105,7 +105,7 @@ This block manages brightness using an up-down counter with an integrated auto-r
 ## Other Outputs
 
 * **A3 Poster:** [PDF](./poster.pdf)
-* **Video demonstration:** [video](./video.MP4)
+* **Video demonstration:** [video](https://vutbr-my.sharepoint.com/:v:/g/personal/270827_vutbr_cz/IQB28Sa8O9yiRJrCtMljs93DAVKDmD5iT3TW8T_pGF7_Urw?e=NYmcgN)
 
 ### Tools & References
 * **Software:** Vivado 2025.2
